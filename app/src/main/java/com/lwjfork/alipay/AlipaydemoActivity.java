@@ -29,17 +29,17 @@ public class AlipaydemoActivity extends FragmentActivity {
 
             @Override
             public void payWaitConfirm(PayResult payResult) {
-                Toast.makeText(AlipaydemoActivity.this, "确认中/Confirming" + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AlipaydemoActivity.this, "确认中/Confirming : " + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void paySuccess(PayResult payResult) {
-                Toast.makeText(AlipaydemoActivity.this, "成功/Success" + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AlipaydemoActivity.this, "成功/Success : " + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void payFail(PayResult payResult) {
-                Toast.makeText(AlipaydemoActivity.this, "失败/Failure" + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AlipaydemoActivity.this, "失败/Failure : " + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
 
             }
         });
@@ -65,19 +65,19 @@ public class AlipaydemoActivity extends FragmentActivity {
             @Override
             public void payWaitConfirm(PayResult payResult) {
                 // TODO Auto-generated method stub
-                Toast.makeText(AlipaydemoActivity.this, "确认中/Confirming" + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AlipaydemoActivity.this, "确认中/Confirming : " + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void paySuccess(PayResult payResult) {
                 // TODO Auto-generated method stub
-                Toast.makeText(AlipaydemoActivity.this, "成功/Success" + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AlipaydemoActivity.this, "成功/Success : " + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void payFail(PayResult payResult) {
                 // TODO Auto-generated method stub
-                Toast.makeText(AlipaydemoActivity.this, "失败/Failure" + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AlipaydemoActivity.this, "失败/Failure : " + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
 
             }
         });
