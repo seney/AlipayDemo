@@ -8,11 +8,4 @@ public class ClientOrderInfo extends OrderInfoModel {
     public String subject = "11";
     public String body  = "11";
     public String price  = "0.01";
-	
-		
-		
-		
-		
-	
-	
 }

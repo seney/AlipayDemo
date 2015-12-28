@@ -21,7 +21,7 @@ public class AlipaydemoActivity extends FragmentActivity {
 
 
     @SuppressWarnings("unchecked")
-    public void testPayClient(){
+    public void testPayClient() {
         // 订单
         ClientOrderInfo orderInfoModel = new ClientOrderInfo();
         orderInfoModel.orderInfo = getOrderInfo(orderInfoModel);
@@ -29,24 +29,24 @@ public class AlipaydemoActivity extends FragmentActivity {
 
             @Override
             public void payWaitConfirm(PayResult payResult) {
-                Toast.makeText(AlipaydemoActivity.this, "确认中/Confirming : " + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AlipaydemoActivity.this, "确认中/Confirming : " + resultStatusText(payResult.getResultStatus()), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void paySuccess(PayResult payResult) {
-                Toast.makeText(AlipaydemoActivity.this, "成功/Success : " + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AlipaydemoActivity.this, "成功/Success : " + resultStatusText(payResult.getResultStatus()), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void payFail(PayResult payResult) {
-                Toast.makeText(AlipaydemoActivity.this, "失败/Failure : " + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AlipaydemoActivity.this, "失败/Failure : " + resultStatusText(payResult.getResultStatus()), Toast.LENGTH_LONG).show();
 
             }
         });
     }
 
     @SuppressWarnings("unchecked")
-    public void testPayServer(){
+    public void testPayServer() {
         // 订单
         ServerOrderInfo orderInfoModel = new ServerOrderInfo();
         /**
@@ -54,40 +54,56 @@ public class AlipaydemoActivity extends FragmentActivity {
          *    注意  是否 encode 编码了
          *             支付宝接受 待签名字串 是 明文  不可  encode 编码
          *                       签名字串  必须是 encode 过一次的
-        orderInfoModel.sign = "";
-        orderInfoModel.orderInfo = "";
-        orderInfoModel.sign_type = "";
+         orderInfoModel.sign = "";
+         orderInfoModel.orderInfo = "";
+         orderInfoModel.sign_type = "";
          sign_type 可以不赋值
-       **/
+         **/
 
         AliPayUtils.getInstance().pay(this, orderInfoModel, new IAlipayListener() {
 
             @Override
             public void payWaitConfirm(PayResult payResult) {
                 // TODO Auto-generated method stub
-                Toast.makeText(AlipaydemoActivity.this, "确认中/Confirming : " + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AlipaydemoActivity.this, "确认中/Confirming : " + resultStatusText(payResult.getResultStatus()), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void paySuccess(PayResult payResult) {
                 // TODO Auto-generated method stub
-                Toast.makeText(AlipaydemoActivity.this, "成功/Success : " + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AlipaydemoActivity.this, "成功/Success : " + resultStatusText(payResult.getResultStatus()), Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void payFail(PayResult payResult) {
                 // TODO Auto-generated method stub
-                Toast.makeText(AlipaydemoActivity.this, "失败/Failure : " + payResult.getResultStatus(), Toast.LENGTH_LONG).show();
-
+                Toast.makeText(AlipaydemoActivity.this, "失败/Failure : " + resultStatusText(payResult.getResultStatus()), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private String resultStatusText(String resultCode) {
+        String str = "";
+
+        if ("9000".equals(resultCode)) {
+            str = "SUCCESS";
+        } else if ("4000".equals(resultCode)) {
+            str = "SYSTEM EXCEPTIONS";
+        } else if ("4001".equals(resultCode)) {
+            str = "ORDER PARAMETERS PROBLEM";
+        } else if ("6001".equals(resultCode)) {
+            str = "YOU CANCELED";
+        } else if ("6002".equals(resultCode)) {
+            str = "INTERNET CONNECTION PROBLEM";
+        }
+
+        return str + " " + resultCode;
     }
 
 
     /**
      * call alipay sdk pay. 调用SDK支付
-     *     客户端进行签名
-     *
+     * 客户端进行签名
      */
     @SuppressWarnings("unchecked")
     public void clientsignpay(View v) {
@@ -95,9 +111,10 @@ public class AlipaydemoActivity extends FragmentActivity {
         testPayClient();
 
     }
+
     /**
      * call alipay sdk pay. 调用SDK支付
-     *    服务端进行签名
+     * 服务端进行签名
      */
     @SuppressWarnings("unchecked")
     public void serversignpay(View v) {
@@ -109,16 +126,14 @@ public class AlipaydemoActivity extends FragmentActivity {
     /**
      * check whether the device has authentication alipay account.
      * 查询终端设备是否存在支付宝认证账户
-     *
      */
-    public void check(View v){
+    public void check(View v) {
         AliPayUtils.getInstance().check(this);
 
     }
 
     /**
      * create the order info. 创建订单信息
-     *
      */
     public String getOrderInfo(ClientOrderInfo orderInfoModel) {
         // 签约合作者身份ID
